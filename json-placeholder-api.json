@@ -1,0 +1,3263 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "https://testmercury.wciom.ru/api/v2",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "ResearchDataApi"
+    },
+    {
+      "name": "SearchApi"
+    },
+    {
+      "name": "DownloadApi"
+    },
+    {
+      "name": "UserApi"
+    },
+    {
+      "name": "EventApi"
+    },
+    {
+      "name": "RoleApi"
+    },
+    {
+      "name": "ResearchProjectApi"
+    },
+    {
+      "name": "ExportApi"
+    },
+    {
+      "name": "RegionApi"
+    },
+    {
+      "name": "FormApi"
+    },
+    {
+      "name": "UsersApi"
+    },
+    {
+      "name": "DepartmentApi"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "UsersApi"
+        ],
+        "operationId": "allUsersList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UsersApi"
+        ],
+        "operationId": "updateUsersList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserVO"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/region/regions": {
+      "put": {
+        "tags": [
+          "RegionApi"
+        ],
+        "operationId": "updateRegion",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CHRegion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RegionApi"
+        ],
+        "operationId": "createRegion",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CHRegion"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/updateSid": {
+      "post": {
+        "tags": [
+          "UserApi"
+        ],
+        "operationId": "updateSidWithCredentials",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSidRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": [
+          "UserApi"
+        ],
+        "summary": "Авторизация",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/form/{id}/permission": {
+      "post": {
+        "tags": [
+          "FormApi"
+        ],
+        "summary": "Задание прав достуа вопросам анкеты",
+        "operationId": "setPermissions",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор анкеты",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPermissionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/form/researchData/{researchDataId}/project": {
+      "post": {
+        "tags": [
+          "FormApi"
+        ],
+        "summary": "Создание проекта анкеты из результата исследования",
+        "operationId": "createProject",
+        "parameters": [
+          {
+            "name": "researchDataId",
+            "in": "path",
+            "description": "Идентификатор результата исследования",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/form/project/{projectId}": {
+      "post": {
+        "tags": [
+          "FormApi"
+        ],
+        "summary": "Создание анкеты для проекта анкеты",
+        "operationId": "createFormForProject",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Идентификатор проекта анкеты",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Form"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/export/sav": {
+      "post": {
+        "tags": [
+          "ExportApi"
+        ],
+        "operationId": "exportSav",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "UserApi"
+        ],
+        "summary": "Информация о текущем пользователе",
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MercuryUserDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/test/run/{date}": {
+      "get": {
+        "tags": [
+          "test-controller"
+        ],
+        "operationId": "run",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/search": {
+      "get": {
+        "tags": [
+          "SearchApi"
+        ],
+        "summary": "Поиск по всем объектам",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Поисковый запрос",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "department",
+            "in": "query",
+            "description": "Практика",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Нижняя граница даты создания",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Верхняя граница даты создания",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Порядковый номер стартовой записи",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список объектов (Question, Form, FieImport, TemplateQuestion, Project)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectsList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/templateQuestions": {
+      "get": {
+        "tags": [
+          "SearchApi"
+        ],
+        "summary": "Поиск шаблонов вопросов",
+        "operationId": "searchTemplateQuestions",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Поисковый запрос",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "department",
+            "in": "query",
+            "description": "Практика",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Категория",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Нижняя граница даты создания",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Верхняя граница даты создания",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "Область поиска",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Область поиска",
+                "enum": [
+                  "QUESTIONS",
+                  "CHOICES"
+                ]
+              }
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Тип вопроса",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionsCountFrom",
+            "in": "query",
+            "description": "Нижняя граница количества вопросов",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionsCountTo",
+            "in": "query",
+            "description": "Верхняя граница количества вопросов",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Порядковый номер стартовой записи",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateQuestionsList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/questions": {
+      "get": {
+        "tags": [
+          "SearchApi"
+        ],
+        "summary": "Поиск вопросов",
+        "operationId": "searchQuestions",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Поисковый запрос",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "department",
+            "in": "query",
+            "description": "Практика",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Категория",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Нижняя граница даты завершения",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Верхняя граница даты завершения",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "Область поиска",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Область поиска",
+                "enum": [
+                  "QUESTIONS",
+                  "CHOICES"
+                ]
+              }
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Тип вопроса",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "description": "География опроса",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "researchMethod",
+            "in": "query",
+            "description": "Метод исследования",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "sampleSizeFrom",
+            "in": "query",
+            "description": "Нижняя граница объема выборки",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sampleSizeTo",
+            "in": "query",
+            "description": "Верхняя граница объема выборки",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "researchDaysFrom",
+            "in": "query",
+            "description": "Нижняя граница количества дней опроса",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "researchDaysTo",
+            "in": "query",
+            "description": "Верхняя граница количества дней опроса",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Порядковый номер стартовой записи",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionsList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/projects": {
+      "get": {
+        "tags": [
+          "SearchApi"
+        ],
+        "summary": "Поиск проектов анкет",
+        "operationId": "searchProjects",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Поисковый запрос",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "department",
+            "in": "query",
+            "description": "Практика",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Категория",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Нижняя граница даты создания",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Верхняя граница даты создания",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "Область поиска",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Область поиска",
+                "enum": [
+                  "QUESTIONS",
+                  "CHOICES"
+                ]
+              }
+            }
+          },
+          {
+            "name": "questionsCountFrom",
+            "in": "query",
+            "description": "Нижняя граница количества вопросов",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionsCountTo",
+            "in": "query",
+            "description": "Верхняя граница количества вопросов",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Порядковый номер стартовой записи",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectsList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/forms": {
+      "get": {
+        "tags": [
+          "SearchApi"
+        ],
+        "summary": "Поиск анкеты",
+        "operationId": "searchForms",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Поисковый запрос",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "department",
+            "in": "query",
+            "description": "Практика",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Категория",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Нижняя граница даты завершения",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Верхняя граница даты завершения",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "description": "География опроса",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "researchMethod",
+            "in": "query",
+            "description": "Метод исследования",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          {
+            "name": "sampleSizeFrom",
+            "in": "query",
+            "description": "Нижняя граница объема выборки",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sampleSizeTo",
+            "in": "query",
+            "description": "Верхняя граница объема выборки",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionsCountFrom",
+            "in": "query",
+            "description": "Нижняя граница количества вопросов",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "questionsCountTo",
+            "in": "query",
+            "description": "Верхняя граница количества вопросов",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Порядковый номер стартовой записи",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormsList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/files": {
+      "get": {
+        "tags": [
+          "SearchApi"
+        ],
+        "summary": "Поиск файлов",
+        "operationId": "searchFiles",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Поисковый запрос",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "department",
+            "in": "query",
+            "description": "Практика",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Нижняя граница даты создания",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Верхняя граница даты создания",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileType",
+            "in": "query",
+            "description": "Тип файла",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Тип файла",
+                "enum": [
+                  "WORD",
+                  "POWER_POINT",
+                  "EXCEL",
+                  "PDF",
+                  "OTHER"
+                ]
+              }
+            }
+          },
+          {
+            "name": "projectState",
+            "in": "query",
+            "description": "Этап проекта",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Порядковый номер стартовой записи",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Размер страницы",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileImportsList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role": {
+      "get": {
+        "tags": [
+          "RoleApi"
+        ],
+        "summary": "Получение всех ролей",
+        "operationId": "getRoles",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/research-project/states": {
+      "get": {
+        "tags": [
+          "ResearchProjectApi"
+        ],
+        "summary": "Получение этапов исследовательского проекта",
+        "operationId": "getResearchProjectStates",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResearchProjectState"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/research-data/{id}/hasRegionData": {
+      "get": {
+        "tags": [
+          "ResearchDataApi"
+        ],
+        "summary": "Проверка, есть ли вопросы с 'region' в коде",
+        "operationId": "hasRegionData",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор результата исследования",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/region": {
+      "get": {
+        "tags": [
+          "RegionApi"
+        ],
+        "operationId": "getAllRegions",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RegionApi"
+        ],
+        "operationId": "deleteRegion",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/region/{id}": {
+      "get": {
+        "tags": [
+          "RegionApi"
+        ],
+        "operationId": "getRegion",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/region/meta": {
+      "get": {
+        "tags": [
+          "RegionApi"
+        ],
+        "operationId": "getRegionMeta",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/region/meta2": {
+      "get": {
+        "tags": [
+          "RegionApi"
+        ],
+        "operationId": "getRegionMeta2",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/form/{id}": {
+      "get": {
+        "tags": [
+          "FormApi"
+        ],
+        "summary": "Получение анкеты",
+        "operationId": "getForm",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор анкеты",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Form"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FormApi"
+        ],
+        "summary": "Удаление анкеты",
+        "operationId": "deleteForm",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Идентификатор анкеты",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/event": {
+      "get": {
+        "tags": [
+          "EventApi"
+        ],
+        "summary": "Получение событий",
+        "operationId": "getEvents",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/download": {
+      "get": {
+        "tags": [
+          "DownloadApi"
+        ],
+        "operationId": "downloadFile",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/department": {
+      "get": {
+        "tags": [
+          "DepartmentApi"
+        ],
+        "summary": "Получение практик",
+        "operationId": "getDepartments",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Department"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/info/backend": {
+      "get": {
+        "tags": [
+          "info-controller"
+        ],
+        "operationId": "index",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RoleVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "authority": {
+            "type": "string"
+          }
+        }
+      },
+      "SettingVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INT",
+              "FLOAT",
+              "STRING",
+              "DATE"
+            ]
+          },
+          "value": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "UserVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "objectSid": {
+            "type": "string"
+          },
+          "userNonExpired": {
+            "type": "boolean"
+          },
+          "userNonLocked": {
+            "type": "boolean"
+          },
+          "credentialsNonExpired": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoleVO"
+            }
+          },
+          "settings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SettingVO"
+            }
+          },
+          "departmentId": {
+            "type": "string"
+          },
+          "createdTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CHRegion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "abbr": {
+            "type": "string"
+          },
+          "parent": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          }
+        }
+      },
+      "UpdateSidRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "apply": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Имя пользователя"
+          },
+          "password": {
+            "type": "string",
+            "description": "Пароль"
+          }
+        },
+        "description": "Запрос на авторизацию (логин и пароль)"
+      },
+      "Instant": {
+        "type": "object",
+        "properties": {
+          "value$kotlinx_datetime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "nanosecondsOfSecond": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "epochSeconds": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "description": "Дата и время создания"
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Уникальный идентификатор",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код роли"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название роли"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание роли"
+          }
+        },
+        "description": "Роль"
+      },
+      "Setting": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название настройки"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание настройки"
+          },
+          "type": {
+            "type": "string",
+            "description": "Тип настройки",
+            "enum": [
+              "INT",
+              "FLOAT",
+              "STRING",
+              "DATE"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Значение настройки"
+          }
+        },
+        "description": "Настройка"
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email"
+          },
+          "userName": {
+            "type": "string",
+            "description": "Логин пользователя"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "Имя пользователя"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Фамилия пользователя"
+          },
+          "objectSid": {
+            "type": "string",
+            "description": "Идентификатор в Active Directory"
+          },
+          "roles": {
+            "type": "array",
+            "description": "Роли пользователя",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          },
+          "settings": {
+            "type": "array",
+            "description": "Настройки пользователя",
+            "items": {
+              "$ref": "#/components/schemas/Setting"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "description": "Идентификаторы групп в Active Directory",
+            "items": {
+              "type": "string",
+              "description": "Идентификаторы групп в Active Directory"
+            }
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Пользователь"
+      },
+      "SetPermissionRequest": {
+        "required": [
+          "objectSid",
+          "permission"
+        ],
+        "type": "object",
+        "properties": {
+          "objectSid": {
+            "type": "string",
+            "description": "Идентификатор пользователя или группы в ActiveDirectory"
+          },
+          "permission": {
+            "type": "integer",
+            "description": "Права доступа",
+            "format": "int32"
+          }
+        },
+        "description": "Запрос на задание прав доступа"
+      },
+      "Choice": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название варианта ответа"
+          },
+          "value": {
+            "type": "integer",
+            "description": "Значение варианта ответа",
+            "format": "int32"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Вариант ответа"
+      },
+      "Department": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентикафикатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          }
+        },
+        "description": "Практика"
+      },
+      "DictionaryItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор записи",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код записи"
+          },
+          "name": {
+            "type": "string",
+            "description": "Наименование записи"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание записи"
+          }
+        },
+        "description": "Запись справочника"
+      },
+      "FileImport": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "department": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "fileName": {
+            "type": "string",
+            "description": "Название файла"
+          },
+          "fileLink": {
+            "type": "string",
+            "description": "Ссылка на файл"
+          },
+          "extension": {
+            "type": "string",
+            "description": "Расширение файла"
+          },
+          "size": {
+            "type": "integer",
+            "description": "Размер файла в байтах",
+            "format": "int32"
+          },
+          "filePath": {
+            "type": "string",
+            "description": "Путь к файлу"
+          },
+          "fileHash": {
+            "type": "string",
+            "description": "Хэш файла"
+          },
+          "fileType": {
+            "type": "string",
+            "description": "Тип файла",
+            "enum": [
+              "WORD",
+              "POWER_POINT",
+              "EXCEL",
+              "PDF",
+              "OTHER"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "description": "Содержимое документа"
+          },
+          "researchProject": {
+            "$ref": "#/components/schemas/ResearchProject"
+          },
+          "researchProjectState": {
+            "$ref": "#/components/schemas/ResearchProjectState"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Информация об импорте файла"
+      },
+      "Folder": {
+        "required": [
+          "createdTime",
+          "id",
+          "name",
+          "shared"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "folders": {
+            "type": "array",
+            "description": "Дочерние папки",
+            "items": {
+              "$ref": "#/components/schemas/Folder"
+            }
+          },
+          "acl": {
+            "type": "array",
+            "description": "Доступ к папке",
+            "items": {
+              "$ref": "#/components/schemas/FolderPermission"
+            }
+          },
+          "shared": {
+            "type": "boolean",
+            "description": "Общая папка"
+          },
+          "projects": {
+            "type": "array",
+            "description": "Проекты анкет",
+            "items": {
+              "$ref": "#/components/schemas/ProjectShort"
+            }
+          },
+          "parent": {
+            "type": "string",
+            "description": "Идентификатор родительской папки"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Папка"
+      },
+      "FolderPermission": {
+        "type": "object",
+        "properties": {
+          "folderId": {
+            "type": "string",
+            "description": "Идентификатор папки"
+          },
+          "objectSid": {
+            "type": "string",
+            "description": "Идентификатор пользователя"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "permission": {
+            "type": "integer",
+            "description": "Права доступа",
+            "format": "int32"
+          },
+          "inheritance": {
+            "type": "boolean"
+          },
+          "group": {
+            "type": "boolean"
+          }
+        },
+        "description": "Доступ к папке"
+      },
+      "Form": {
+        "required": [
+          "createdTime",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание"
+          },
+          "department": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "researchProject": {
+            "$ref": "#/components/schemas/ResearchProject"
+          },
+          "secrecy": {
+            "type": "boolean",
+            "description": "Гриф секретности"
+          },
+          "secrecyDueTime": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "categories": {
+            "type": "array",
+            "description": "Категории анкеты",
+            "items": {
+              "$ref": "#/components/schemas/DictionaryItem"
+            }
+          },
+          "researchData": {
+            "type": "array",
+            "description": "Результаты исследования",
+            "items": {
+              "$ref": "#/components/schemas/ResearchData"
+            }
+          },
+          "questionsCount": {
+            "type": "integer",
+            "description": "Количество вопросов",
+            "format": "int32"
+          },
+          "respondentsCount": {
+            "type": "integer",
+            "description": "Количество респондентов",
+            "format": "int32"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "Идентификатор проекта анкеты"
+          },
+          "updatedTime": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Анкета"
+      },
+      "LocalDate": {
+        "type": "object",
+        "properties": {
+          "value$kotlinx_datetime": {
+            "type": "string",
+            "format": "date"
+          },
+          "monthNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "month": {
+            "type": "string",
+            "enum": [
+              "JANUARY",
+              "FEBRUARY",
+              "MARCH",
+              "APRIL",
+              "MAY",
+              "JUNE",
+              "JULY",
+              "AUGUST",
+              "SEPTEMBER",
+              "OCTOBER",
+              "NOVEMBER",
+              "DECEMBER"
+            ]
+          },
+          "dayOfWeek": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          },
+          "dayOfYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dayOfMonth": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "description": "Дата архивации исследовательского проекта"
+      },
+      "Option": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "description": "Клиент (заказчик проекта)"
+      },
+      "Project": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название проекта анкеты"
+          },
+          "flMultipleChoiceInCategoricalMode": {
+            "type": "boolean",
+            "description": "Вопросы с множественным выбором в категориальном режиме"
+          },
+          "startQuestionNo": {
+            "type": "integer",
+            "description": "Номер стартового вопроса",
+            "format": "int32"
+          },
+          "quotas": {
+            "type": "array",
+            "description": "Квоты",
+            "items": {
+              "$ref": "#/components/schemas/Quota"
+            }
+          },
+          "questions": {
+            "type": "array",
+            "description": "Вопросы",
+            "items": {
+              "$ref": "#/components/schemas/ProjectQuestion"
+            }
+          },
+          "parameters": {
+            "type": "array",
+            "description": "Параметры",
+            "items": {
+              "$ref": "#/components/schemas/ProjectParameter"
+            }
+          },
+          "folder": {
+            "$ref": "#/components/schemas/Folder"
+          },
+          "forms": {
+            "type": "array",
+            "description": "Анкеты",
+            "items": {
+              "$ref": "#/components/schemas/Form"
+            }
+          },
+          "readOnly": {
+            "type": "boolean",
+            "description": "Только чтение"
+          },
+          "approved": {
+            "type": "boolean",
+            "description": "Подтверждено"
+          },
+          "author": {
+            "type": "string",
+            "description": "Автор"
+          },
+          "department": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "updatedTime": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Проект анкеты"
+      },
+      "ProjectChoice": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название варианта ответа"
+          },
+          "value": {
+            "type": "string",
+            "description": "Значение варианта ответа"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Комментарий"
+          },
+          "media": {
+            "type": "string"
+          },
+          "hide": {
+            "type": "string"
+          },
+          "answerGroupTags": {
+            "type": "string"
+          },
+          "flags": {
+            "type": "array",
+            "description": "Флаги",
+            "items": {
+              "type": "string",
+              "description": "Флаг варианта ответа",
+              "enum": [
+                "ADD_OPEN_ANSWER",
+                "SINGLE_CHOICE",
+                "NON_ROTATABLE",
+                "DO_NOT_READ"
+              ]
+            }
+          }
+        },
+        "description": "Вариант ответа"
+      },
+      "ProjectParameter": {
+        "required": [
+          "id",
+          "name",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название параметра"
+          },
+          "value": {
+            "type": "string",
+            "description": "Значение параметра"
+          }
+        },
+        "description": "Параметр проекта анкеты"
+      },
+      "ProjectQuestion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название вопроса проекта анкеты"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Комментарий"
+          },
+          "tableRows": {
+            "type": "array",
+            "description": "tableRows",
+            "items": {
+              "$ref": "#/components/schemas/ProjectTableRow"
+            }
+          },
+          "choices": {
+            "type": "array",
+            "description": "Варианты ответа",
+            "items": {
+              "$ref": "#/components/schemas/ProjectChoice"
+            }
+          },
+          "spssPrefix": {
+            "type": "string",
+            "description": "Spss-префикс"
+          },
+          "media": {
+            "type": "string",
+            "description": "Название приложенного файла"
+          },
+          "type": {
+            "type": "string",
+            "description": "Тип вопроса проекта анкеты",
+            "enum": [
+              "INFO",
+              "OPEN",
+              "CLOSED"
+            ]
+          },
+          "maxChoiceCount": {
+            "type": "integer",
+            "description": "Максимальное количество вариантов ответов",
+            "format": "int32"
+          },
+          "openAnswerFormat": {
+            "type": "string",
+            "description": "Формат открытого вопроса"
+          },
+          "minValue": {
+            "type": "string",
+            "description": "Минимальное значение"
+          },
+          "maxValue": {
+            "type": "string",
+            "description": "Максимальное значение"
+          },
+          "maxSumValue": {
+            "type": "string"
+          },
+          "hide": {
+            "type": "string",
+            "description": "Инструкция для интервьюера"
+          },
+          "next": {
+            "type": "string",
+            "description": "Следующий вопрос"
+          },
+          "mapping": {
+            "type": "string"
+          },
+          "rotateChoicesFrom": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rotateChoicesTo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flags": {
+            "type": "array",
+            "description": "Флаги проекта вопроса",
+            "items": {
+              "type": "string",
+              "description": "Флаг вопроса",
+              "enum": [
+                "SKIPPABLE",
+                "ROTATE_CHOICES",
+                "ROTATE_TABLE_ROWS",
+                "SCALE",
+                "AB_TESTING",
+                "RANK",
+                "NOT_READABLE"
+              ]
+            }
+          }
+        },
+        "description": "Вопрос проекта анкеты"
+      },
+      "ProjectShort": {
+        "required": [
+          "approved",
+          "author",
+          "createdTime",
+          "id",
+          "modifiedTime",
+          "name",
+          "readOnly"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "folderId": {
+            "type": "string",
+            "description": "Идентификатор папки"
+          },
+          "readOnly": {
+            "type": "boolean",
+            "description": "Только чтение"
+          },
+          "approved": {
+            "type": "boolean",
+            "description": "Подтверждено"
+          },
+          "author": {
+            "type": "string",
+            "description": "Автор"
+          },
+          "modifiedTime": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Проект анкеты"
+      },
+      "ProjectTableRow": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Комментарий"
+          },
+          "media": {
+            "type": "string"
+          },
+          "hide": {
+            "type": "string"
+          },
+          "notRotate": {
+            "type": "boolean"
+          }
+        },
+        "description": "ProjectTableRow"
+      },
+      "Question": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "code": {
+            "type": "string",
+            "description": "Код вопроса"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название вопроса"
+          },
+          "description": {
+            "type": "string",
+            "description": "Описание вопроса"
+          },
+          "department": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "spssPrefix": {
+            "type": "string",
+            "description": "Префикс"
+          },
+          "userId": {
+            "type": "string",
+            "description": "Идентификатор пользователя"
+          },
+          "categories": {
+            "type": "array",
+            "description": "Категории",
+            "items": {
+              "$ref": "#/components/schemas/DictionaryItem"
+            }
+          },
+          "type": {
+            "$ref": "#/components/schemas/DictionaryItem"
+          },
+          "choices": {
+            "type": "array",
+            "description": "Варианты ответа",
+            "items": {
+              "$ref": "#/components/schemas/Choice"
+            }
+          },
+          "researchDataId": {
+            "type": "string",
+            "description": "Результат исследования"
+          },
+          "researchData": {
+            "$ref": "#/components/schemas/ResearchData"
+          },
+          "editable": {
+            "type": "boolean",
+            "description": "Доступно для редактирования"
+          },
+          "order": {
+            "type": "integer",
+            "description": "Порядковый номер",
+            "format": "int32"
+          },
+          "secrecy": {
+            "type": "boolean",
+            "description": "Гриф секретности"
+          },
+          "secrecyDueTime": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "updatedTime": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Вопрос"
+      },
+      "Quota": {
+        "required": [
+          "condition",
+          "count",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "condition": {
+            "type": "string",
+            "description": "Условие"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Количество",
+            "format": "int32"
+          }
+        },
+        "description": "Квота"
+      },
+      "Region": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название региона"
+          },
+          "abbr": {
+            "type": "string",
+            "description": "Аббревиатура региона"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Region"
+          }
+        },
+        "description": "Регион"
+      },
+      "ResearchData": {
+        "required": [
+          "createdTime",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "department": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "formId": {
+            "type": "string",
+            "description": "Идентификатор анкеты"
+          },
+          "researchMethod": {
+            "$ref": "#/components/schemas/DictionaryItem"
+          },
+          "fileImport": {
+            "$ref": "#/components/schemas/FileImport"
+          },
+          "regions": {
+            "type": "array",
+            "description": "Регионы",
+            "items": {
+              "$ref": "#/components/schemas/Region"
+            }
+          },
+          "questions": {
+            "type": "array",
+            "description": "Вопросы",
+            "items": {
+              "$ref": "#/components/schemas/Question"
+            }
+          },
+          "respondentsCount": {
+            "type": "integer",
+            "description": "Количество респондентов",
+            "format": "int32"
+          },
+          "sampleSize": {
+            "type": "integer",
+            "description": "Объем выборки",
+            "format": "int32"
+          },
+          "researchDays": {
+            "type": "integer",
+            "description": "Количество дней опроса",
+            "format": "int32"
+          },
+          "questionsCount": {
+            "type": "integer",
+            "description": "Количество вопросов",
+            "format": "int32"
+          },
+          "conductedDate": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "archivedDate": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Результат исследования"
+      },
+      "ResearchProject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "externalId": {
+            "type": "integer",
+            "description": "Идентификатор в системе \"1Форма\"",
+            "format": "int32"
+          },
+          "client": {
+            "$ref": "#/components/schemas/Option"
+          },
+          "department": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "researchCode": {
+            "type": "string",
+            "description": "Код исследования"
+          },
+          "researchNumber": {
+            "type": "string",
+            "description": "Номер сметы"
+          },
+          "archivedDate": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "secrecy": {
+            "type": "boolean",
+            "description": "Гриф секретности"
+          },
+          "secrecyDueDate": {
+            "$ref": "#/components/schemas/LocalDate"
+          },
+          "states": {
+            "type": "array",
+            "description": "Этапы проекта",
+            "items": {
+              "$ref": "#/components/schemas/ResearchProjectState"
+            }
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Исследовательский проект"
+      },
+      "ResearchProjectState": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Идентификатор",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "externalId": {
+            "type": "string",
+            "description": "Идентификатор этапа в системе \"1Форма\""
+          },
+          "order": {
+            "type": "integer",
+            "description": "Порядковый номер",
+            "format": "int32"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Этап исследовательского проекта"
+      },
+      "GrantedAuthority": {
+        "type": "object",
+        "properties": {
+          "authority": {
+            "type": "string"
+          }
+        }
+      },
+      "MercuryUserDetails": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "objectSid": {
+            "type": "string"
+          },
+          "userNonExpired": {
+            "type": "boolean"
+          },
+          "userNonLocked": {
+            "type": "boolean"
+          },
+          "credentialsNonExpired": {
+            "type": "boolean"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "departmentId": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "authorities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GrantedAuthority"
+            }
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "accountNonLocked": {
+            "type": "boolean"
+          },
+          "accountNonExpired": {
+            "type": "boolean"
+          }
+        },
+        "description": "Информация о пользователе"
+      },
+      "JsonElement": {
+        "type": "object",
+        "description": "Результат"
+      },
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Общее количество записей",
+            "format": "int32"
+          },
+          "start": {
+            "type": "integer",
+            "description": "Номер первой записи в списке",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "Размер страницы",
+            "format": "int32"
+          }
+        },
+        "description": "Информация о результате"
+      },
+      "ObjectsList": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "description": "Результат",
+            "items": {
+              "$ref": "#/components/schemas/JsonElement"
+            }
+          }
+        },
+        "description": "Список"
+      },
+      "TemplateBlock": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название блока шаблонов вопросов"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "Идентификатор родительского блока шаблонов вопросов"
+          },
+          "department": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "updatedTime": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Блок шаблонов вопросов"
+      },
+      "TemplateChoice": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "value": {
+            "type": "string",
+            "description": "Значение"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Комментарий"
+          },
+          "media": {
+            "type": "string",
+            "description": "Название приложенного файла"
+          },
+          "hide": {
+            "type": "string",
+            "description": "Инструкция для интервьюера"
+          },
+          "answerGroupTags": {
+            "type": "string"
+          },
+          "flags": {
+            "type": "array",
+            "description": "Флаги",
+            "items": {
+              "type": "string",
+              "description": "Флаг варианта ответа",
+              "enum": [
+                "ADD_OPEN_ANSWER",
+                "SINGLE_CHOICE",
+                "NON_ROTATABLE",
+                "DO_NOT_READ"
+              ]
+            }
+          }
+        },
+        "description": "Вариант ответа шаблона вопроса"
+      },
+      "TemplateQuestion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "order": {
+            "type": "integer",
+            "description": "Порядковый номер",
+            "format": "int32"
+          },
+          "blocks": {
+            "type": "array",
+            "description": "Блоки шаблонов вопросов, к которым относится шаблон вопроса",
+            "items": {
+              "$ref": "#/components/schemas/TemplateBlock"
+            }
+          },
+          "choices": {
+            "type": "array",
+            "description": "Варианты ответа",
+            "items": {
+              "$ref": "#/components/schemas/TemplateChoice"
+            }
+          },
+          "spssPrefix": {
+            "type": "string",
+            "description": "Spss-префикс"
+          },
+          "name": {
+            "type": "string",
+            "description": "Название"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Комментарий"
+          },
+          "media": {
+            "type": "string",
+            "description": "Название приложенного файла"
+          },
+          "type": {
+            "type": "string",
+            "description": "Тип",
+            "enum": [
+              "INFO",
+              "OPEN",
+              "CLOSED"
+            ]
+          },
+          "maxChoiceCount": {
+            "type": "integer",
+            "description": "Максимальное количество ответов",
+            "format": "int32"
+          },
+          "openAnswerFormat": {
+            "type": "string",
+            "description": "Формат открытого вопроса"
+          },
+          "minValue": {
+            "type": "string",
+            "description": "Минималное значение"
+          },
+          "maxValue": {
+            "type": "string",
+            "description": "Максимальное значение"
+          },
+          "maxSumValue": {
+            "type": "string"
+          },
+          "hide": {
+            "type": "string",
+            "description": "Инструкция для интервьюера"
+          },
+          "next": {
+            "type": "string",
+            "description": "Следующий вопрос"
+          },
+          "mapping": {
+            "type": "string"
+          },
+          "rotateChoicesFrom": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rotateChoicesTo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "flags": {
+            "type": "array",
+            "description": "Флаги шаблона вопроса",
+            "items": {
+              "type": "string",
+              "description": "Флаг вопроса",
+              "enum": [
+                "SKIPPABLE",
+                "ROTATE_CHOICES",
+                "ROTATE_TABLE_ROWS",
+                "SCALE",
+                "AB_TESTING",
+                "RANK",
+                "NOT_READABLE"
+              ]
+            }
+          },
+          "department": {
+            "$ref": "#/components/schemas/Department"
+          },
+          "updatedTime": {
+            "$ref": "#/components/schemas/Instant"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Шаблон вопроса"
+      },
+      "TemplateQuestionsList": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "description": "Результат",
+            "items": {
+              "$ref": "#/components/schemas/TemplateQuestion"
+            }
+          }
+        },
+        "description": "Список шаблонов вопросов"
+      },
+      "QuestionsList": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "description": "Результат",
+            "items": {
+              "$ref": "#/components/schemas/Question"
+            }
+          }
+        },
+        "description": "Список вопросов"
+      },
+      "ProjectsList": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "description": "Результат",
+            "items": {
+              "$ref": "#/components/schemas/Project"
+            }
+          }
+        },
+        "description": "Список проектов анкет"
+      },
+      "FormsList": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "description": "Результат",
+            "items": {
+              "$ref": "#/components/schemas/Form"
+            }
+          }
+        },
+        "description": "Список анкет"
+      },
+      "FileImportsList": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "description": "Результат",
+            "items": {
+              "$ref": "#/components/schemas/FileImport"
+            }
+          }
+        },
+        "description": "Список файлов"
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Уникальный идентификатор"
+          },
+          "level": {
+            "type": "string",
+            "description": "Уровень"
+          },
+          "source": {
+            "type": "string",
+            "description": "Источник"
+          },
+          "message": {
+            "type": "string",
+            "description": "Сообщение"
+          },
+          "createdTime": {
+            "$ref": "#/components/schemas/Instant"
+          }
+        },
+        "description": "Событие"
+      }
+    }
+  }
+}
